@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <color name="transparent">#00000000</color>
+
+    <!-- Total black -->
+    <color name="total_black_01">#000000</color>
+    <color name="total_black_02">#313336</color>
+
+    <!-- Malachite -->
+    <color name="malachite_00">#083F46</color>
+    <color name="malachite_01">#005E7F</color>
+    <color name="malachite_02">#107F8C</color>
+    <color name="malachite_02_a40">#66107F8C</color>
+    <color name="malachite_02_a50">#80107F8C</color>
+    <color name="malachite_03">#21A19A</color>
+    <color name="malachite_04">#90D0CC</color>
+    <color name="malachite_05">#BEF8EC</color>
+
+    <!--Pacific Blue-->
+    <color name="pacific_blue_04">#6CC6DA</color>
+
+    <!-- Asphalt -->
+    <color name="asphalt_01">#7D838A</color>
+    <color name="asphalt_02">#B2B8BF</color>
+    <color name="asphalt_03">#D0D7DD</color>
+    <color name="asphalt_03_a50">#80D0D7DD</color>
+    <color name="asphalt_04">#E4E8EB</color>
+    <color name="asphalt_05">#F2F4F7</color>
+
+    <!-- Graphite -->
+    <color name="graphite_01">#1F1F22</color>
+    <color name="graphite_02">#565B62</color>
+    <color name="graphite_02_a50">#80565B62</color>
+    <color name="graphite_01_a70">#B31F1F22</color>
+    <color name="graphite_01_a50">#801F1F22</color>
+    <color name="graphite_01_a20">#331F1F22</color>
+
+    <!-- Snowy -->
+    <color name="snowy_01">#FFFFFF</color>
+    <color name="snowy_01_a70">#B3FFFFFF</color>
+    <color name="snowy_01_a50">#80FFFFFF</color>
+
+    <!-- Ruby -->
+    <color name="ruby_01">#A80E2A</color>
+    <color name="ruby_02">#C11030</color>
+    <color name="ruby_03">#DB1237</color>
+    <color name="ruby_04">#FFBDC5</color>
+    <color name="ruby_05">#FFE5E8</color>
+
+    <!-- Pumpkin -->
+    <color name="pumpkin_01">#E58A00</color>
+    <color name="pumpkin_02">#FF9900</color>
+    <color name="pumpkin_03">#FFB13B</color>
+    <color name="pumpkin_04">#FFD9A0</color>
+    <color name="pumpkin_05">#FFF5E6</color>
+
+    <!-- Sky -->
+    <color name="sky_01">#0F5498</color>
+    <color name="sky_02">#1358BF</color>
+    <color name="sky_03">#198CFE</color>
+    <color name="sky_04">#93B7ED</color>
+    <color name="sky_05">#F2F8FF</color>
+
+    <!-- Deprecated -->
+    <!-- Malachite -->
+    <color name="malachite_02_a25">#19107F8C</color> <!-- Remove after fix ic_fast_payments_background_corners-->
+    <!-- Ruby -->
+    <color name="ruby_02_a90">#E6C11030</color>
+    <color name="ruby_02_a50">#80C11030</color>
+    <color name="ruby_02_a25">#19C11030</color>
+    <!-- Pumpkin -->
+    <color name="pumkin_02_a90">#E6FF9900</color>
+    <!-- Asphalt -->
+    <color name="asphalt_02_a20">#33B2B8BF</color>
+    <color name="asphalt_02_a30">#4DB2B8BF</color>
+    <color name="asphalt_01_a50">#807D838A</color>
+    <color name="asphalt_05_a50">#80F2F4F7</color>
+    <!-- Old -->
+    <color name="light_gray">#FFFAFAFA</color>
+    <!-- White -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="white_a95">#F2FFFFFF</color>
+    <color name="white_a90">#E6FFFFFF</color>
+    <color name="white_a85">#D9FFFFFF</color>
+    <color name="white_a70">#B3FFFFFF</color>
+    <color name="white_a50">#80FFFFFF</color>
+    <color name="white_a20">#14FFFFFF</color>
+    <!-- Black -->
+    <color name="black">#FF000000</color>
+    <color name="black_a10">#1A000000</color>
+    <color name="black_a50">#80000000</color>
+    <color name="black_a70">#B3000000</color>
+    <color name="black_a85">#D9000000</color>
+    <color name="black_a90">#E6000000</color>
+    <!-- Graphite -->
+    <color name="graphite_01_a90">#E61F1F22</color>
+    <color name="graphite_01_a30">#4D1F1F22</color>
+    <color name="graphite_01_a10">#1A1F1F22</color>
+</resources>
