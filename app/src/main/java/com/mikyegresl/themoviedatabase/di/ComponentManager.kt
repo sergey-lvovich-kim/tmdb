@@ -4,17 +4,14 @@ import android.app.Application
 import com.mikyegresl.themoviedatabase.di.application.AppComponent
 import com.mikyegresl.themoviedatabase.di.application.AppModule
 import com.mikyegresl.themoviedatabase.di.application.DaggerAppComponent
-import com.mikyegresl.themoviedatabase.di.tmdb.TmdbComponent
 
 object ComponentManager {
 
     private var appComponent: AppComponent? = null
-    private var tmdbComponent: TmdbComponent? = null
 
-    internal fun plusAppComponent(application: Application) =
+    internal fun plusAppComponent() =
         DaggerAppComponent
             .builder()
-            .appModule(AppModule(application))
             .build()
             .also {
                 appComponent = it

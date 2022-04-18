@@ -25,6 +25,9 @@
     <!--Pacific Blue-->
     <color name="pacific_blue_04">#6CC6DA</color>
 
+    <!-- Green -->
+    <color name="green_00">#04BF24</color>
+
     <!-- Asphalt -->
     <color name="asphalt_01">#7D838A</color>
     <color name="asphalt_02">#B2B8BF</color>

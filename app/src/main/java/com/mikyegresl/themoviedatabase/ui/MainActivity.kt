@@ -9,19 +9,16 @@ import com.mikyegresl.themoviedatabase.ui.application.TmdbApp
 
 class MainActivity : BaseActivity() {
 
-    val appComponent: AppComponent by lazy {
+    private val appComponent: AppComponent by lazy {
         (application as TmdbApp).appComponent
     }
-//    private val activityComponent: ActivityComponent = appComponent.activityComponent()
-//
-//    private val configurationComponent: ConfigurationComponent by lazy {
-//        activityComponent.configurationComponent()
-//    }
+
+    val activityComponent: ActivityComponent by lazy {
+        appComponent.activityComponent()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-//        configurationComponent.inject(this)
     }
 }

@@ -5,9 +5,7 @@ import com.mikyegresl.themoviedatabase.utils.rx.Rx2EventBus
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ConfigurationEventBus @Inject constructor(
-
-): IConfigurationEventBus {
+class ConfigurationEventBus @Inject constructor(): IConfigurationEventBus {
 
     private val configuration: Rx2EventBus<ConfigurationResponseModel> = Rx2EventBus()
 

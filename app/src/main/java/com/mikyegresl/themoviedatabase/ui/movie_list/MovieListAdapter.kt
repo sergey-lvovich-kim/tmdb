@@ -1,12 +1,15 @@
-package com.mikyegresl.themoviedatabase.ui.tmdb
+package com.mikyegresl.themoviedatabase.ui.movie_list
 
+import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import com.mikyegresl.themoviedatabase.R
 import com.mikyegresl.themoviedatabase.data.model.MovieModel
 import com.mikyegresl.themoviedatabase.databinding.ItemMovieBinding
+import com.mikyegresl.themoviedatabase.utils.Constants
 
-internal class MovieAdapter(onItemClick: (MovieModel) -> Unit): ListDelegationAdapter<List<MovieModel>>() {
+internal class MovieListAdapter(onItemClick: (MovieModel) -> Unit): ListDelegationAdapter<List<MovieModel>>() {
 
     init {
         delegatesManager.addDelegate(createAdapterDelegate(onItemClick))
@@ -21,7 +24,13 @@ internal class MovieAdapter(onItemClick: (MovieModel) -> Unit): ListDelegationAd
             bind {
                 binding.tvTitle.text = item.title
                 binding.tvReleaseDate.text = item.releaseDate
-//                binding.ivPoster = item.posterPath
+
+                Glide
+                    .with(context)
+                    .load(Constants.TMDB_POSTER_URL + "w92" + item.posterPath)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(binding.ivPoster)
             }
         }
 }

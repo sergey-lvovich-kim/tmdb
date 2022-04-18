@@ -1,21 +1,22 @@
-package com.mikyegresl.themoviedatabase.ui.tmdb
+package com.mikyegresl.themoviedatabase.ui.movie_list
 
+import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationConverter
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationInteractor
-import com.mikyegresl.themoviedatabase.business.tmdb.ITmdbInteractor
+import com.mikyegresl.themoviedatabase.business.tmdb.IMovieListInteractor
 import com.mikyegresl.themoviedatabase.data.model.ConfigurationModel
 import com.mikyegresl.themoviedatabase.data.model.MovieModel
 import com.mikyegresl.themoviedatabase.ui.mvp.Presenter
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulersTransformer
 import javax.inject.Inject
 
-class TmdbPresenter @Inject constructor(
+class MovieListPresenter @Inject constructor(
     private val configurationInteractor: IConfigurationInteractor,
     private val configurationConverter: IConfigurationConverter,
-    private val tmdbInteractor: ITmdbInteractor,
+    private val movieListInteractor: IMovieListInteractor,
     private val rxSchedulersTransformer: RxSchedulersTransformer,
-): Presenter<ITmdbView>(), ITmdbPresenter {
+): Presenter<IMovieListView>(), IMovieListPresenter {
 
     @VisibleForTesting
     var configuration: ConfigurationModel? = null
@@ -56,8 +57,8 @@ class TmdbPresenter @Inject constructor(
         view?.showError(throwable.message!!)
     }
 
-    private fun loadTopRated() {
-        compositeDisposable += tmdbInteractor.getTopRated()
+    override fun loadTopRated() {
+        compositeDisposable += movieListInteractor.getTopRated()
             .compose(rxSchedulersTransformer.getIOToMainTransformer())
             .doOnSubscribe {
                 view?.showLoading()
@@ -65,12 +66,11 @@ class TmdbPresenter @Inject constructor(
             .doFinally {
                 view?.hideLoading()
             }
-            .subscribe( { model ->
-                loadTopRatedSuccess(model.movieList)
-            }, ::loadTopRatedError)
+            .subscribe( { loadTopRatedSuccess(it) }, ::loadTopRatedError)
     }
 
     private fun loadTopRatedSuccess(topRated: List<MovieModel>) {
+        Log.i(TAG, "loadTopRatedSuccess: $topRated")
         view?.showTopRated(topRated)
         view?.hideLoading()
     }
@@ -79,9 +79,15 @@ class TmdbPresenter @Inject constructor(
         view?.showError(throwable.message!!)
     }
 
+    override fun loadRecent() {
+
+    }
+
     override fun onViewResume() {
         isViewActive = true
+
         loadConfigurationIfNeeded()
+        loadTopRated()
     }
 
     override fun onViewPause() {
@@ -92,8 +98,8 @@ class TmdbPresenter @Inject constructor(
         super.onViewReady()
 
         loadConfigurationIfNeeded()
-
+        loadTopRated()
     }
 }
 
-private val TAG = TmdbPresenter::class.java.simpleName
+private val TAG = MovieListPresenter::class.java.simpleName

@@ -3,11 +3,11 @@ package com.mikyegresl.themoviedatabase.ui.mvp
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class Presenter<T: IView>: IPresenter<T> {
-    protected var view: T? = null
+abstract class Presenter<V: IView>: IPresenter<V> {
+    protected var view: V? = null
     protected var compositeDisposable = CompositeDisposable()
 
-    override fun bindView(view: T) {
+    override fun bindView(view: V) {
         this.view = view
     }
 

@@ -1,4 +1,4 @@
-package com.mikyegresl.themoviedatabase.ui.tmdb
+package com.mikyegresl.themoviedatabase.ui.movie_list
 
 import android.os.Bundle
 import android.util.Log
@@ -7,27 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import com.mikyegresl.themoviedatabase.R
 import com.mikyegresl.themoviedatabase.data.model.MovieModel
-import com.mikyegresl.themoviedatabase.databinding.FragmentTmdbBinding
-import com.mikyegresl.themoviedatabase.di.tmdb.TmdbComponent
+import com.mikyegresl.themoviedatabase.databinding.FragmentMovieListBinding
+import com.mikyegresl.themoviedatabase.di.movie_list.MovieListComponent
 import com.mikyegresl.themoviedatabase.ui.BaseFragment
 import com.mikyegresl.themoviedatabase.ui.MainActivity
-import javax.inject.Inject
+import com.mikyegresl.themoviedatabase.utils.ui.presenterBinding
 
-class TmdbFragment: BaseFragment(R.layout.fragment_tmdb), ITmdbView {
+class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListView {
 
-    private lateinit var binding: FragmentTmdbBinding
+    private lateinit var binding: FragmentMovieListBinding
 
-    private val tmdbComponent: TmdbComponent by lazy {
-        (requireActivity() as MainActivity).appComponent.tmdbComponent()
+    private val movieListComponent: MovieListComponent by lazy {
+        (requireActivity() as MainActivity).activityComponent.movieListComponent()
     }
 
-    @Inject
-    lateinit var presenter: ITmdbPresenter
+    private val presenter: IMovieListPresenter by presenterBinding {
+        movieListComponent.presenter()
+    }
+
+    private val adapter: MovieListAdapter by lazy {
+        MovieListAdapter(::onMovieClicked)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        tmdbComponent.inject(this)
+        movieListComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -35,51 +40,45 @@ class TmdbFragment: BaseFragment(R.layout.fragment_tmdb), ITmdbView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTmdbBinding.inflate(inflater, container, false)
+        binding = FragmentMovieListBinding.inflate(inflater, container, false)
 
         with (binding) {
-            binding.rvTopRated.adapter =
-
-            srlLoading.setOnRefreshListener {
-
-            }
+            srlRefresh.setOnRefreshListener(::onRefreshClicked)
         }
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        presenter.onViewReady()
-    }
-
     override fun onResume() {
         super.onResume()
+
         presenter.onViewResume()
     }
 
     override fun onPause() {
         super.onPause()
+
         presenter.onViewPause()
     }
 
     override fun onDestroyView() {
         presenter.unbindView()
+
         super.onDestroyView()
     }
 
     override fun onDestroy() {
         presenter.onDestroy()
+
         super.onDestroy()
     }
 
     override fun showLoading() {
-        binding.srlLoading.isRefreshing = true
+        binding.srlRefresh.isRefreshing = true
     }
 
     override fun hideLoading() {
-        binding.srlLoading.isRefreshing = false
+        binding.srlRefresh.isRefreshing = false
     }
 
     override fun showError(message: String) {
@@ -91,15 +90,20 @@ class TmdbFragment: BaseFragment(R.layout.fragment_tmdb), ITmdbView {
     }
 
     override fun showTopRated(topRated: List<MovieModel>) {
-
+        binding.rvTopRated.adapter = adapter.apply { items = topRated }
     }
 
     override fun showRecent(recent: List<MovieModel>) {
 
     }
 
-    override fun onMovieClicked() {
+    override fun onMovieClicked(movie: MovieModel) {
+        //todo: implement details navigation
+    }
 
+    override fun onRefreshClicked() {
+        presenter.loadTopRated()
+        presenter.loadRecent()
     }
 
     override fun addToFavorites() {
@@ -116,4 +120,4 @@ class TmdbFragment: BaseFragment(R.layout.fragment_tmdb), ITmdbView {
     }
 }
 
-private val TAG = TmdbFragment::javaClass.name
+private val TAG = MovieListFragment::class.java.simpleName

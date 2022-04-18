@@ -11,7 +11,7 @@ class TmdbApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = ComponentManager.plusAppComponent(this)
+        appComponent = ComponentManager.plusAppComponent()
 
     }
 }

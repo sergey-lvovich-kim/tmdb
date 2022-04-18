@@ -31,7 +31,10 @@
     <dimen name="size_88dp">88dp</dimen>
     <dimen name="size_96dp">96dp</dimen>
     <dimen name="size_104dp">104dp</dimen>
+    <dimen name="size_120dp">120dp</dimen>
     <dimen name="size_128dp">128dp</dimen>
+    <dimen name="size_136dp">136dp</dimen>
+    <dimen name="size_160dp">160dp</dimen>
 
     <dimen name="swipe_refresher_offset">@dimen/size_48dp</dimen>
     <dimen name="swipe_refresher_offset_end">96dp</dimen>
@@ -42,6 +45,7 @@
     <dimen name="size_12sp">12sp</dimen>
     <dimen name="size_14sp">14sp</dimen>
     <dimen name="size_16sp">16sp</dimen>
+    <dimen name="size_18sp">18sp</dimen>
     <dimen name="size_20sp">20sp</dimen>
     <dimen name="size_22sp">22sp</dimen>
     <dimen name="size_24sp">24sp</dimen>

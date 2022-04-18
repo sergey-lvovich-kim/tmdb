@@ -2,9 +2,6 @@ package com.mikyegresl.themoviedatabase.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mikyegresl.themoviedatabase.di.application.AppComponent
-import com.mikyegresl.themoviedatabase.di.tmdb.TmdbComponent
-import com.mikyegresl.themoviedatabase.ui.application.TmdbApp
 
 abstract class BaseActivity: AppCompatActivity() {
 
