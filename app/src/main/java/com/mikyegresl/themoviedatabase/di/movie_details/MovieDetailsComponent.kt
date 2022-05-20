@@ -1,10 +1,6 @@
 package com.mikyegresl.themoviedatabase.di.movie_details
 
 import com.mikyegresl.themoviedatabase.business.movie_details.*
-import com.mikyegresl.themoviedatabase.business.tmdb.IMovieListEventBus
-import com.mikyegresl.themoviedatabase.data.repository.ITmdbRepository
-import com.mikyegresl.themoviedatabase.data.repository.TmdbRepository
-import com.mikyegresl.themoviedatabase.di.movie_list.MovieListScope
 import com.mikyegresl.themoviedatabase.ui.movie_details.IMovieDetailsPresenter
 import com.mikyegresl.themoviedatabase.ui.movie_details.MovieDetailsFragment
 import com.mikyegresl.themoviedatabase.ui.movie_details.MovieDetailsPresenter

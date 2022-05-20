@@ -26,7 +26,7 @@ internal annotation class AppScope
 @Component(modules = [AppModule::class])
 interface AppComponent {
 
-    fun activityComponent(): ActivityComponent
+    fun activityComponentBuilder(): ActivityComponent.Builder
 }
 
 @Module

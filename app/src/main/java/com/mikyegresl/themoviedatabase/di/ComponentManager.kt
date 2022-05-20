@@ -20,12 +20,4 @@ object ComponentManager {
     internal fun clearAppComponent() {
         appComponent = null
     }
-
-//    internal fun plusTmdbComponent(): TmdbComponent =
-//        tmdbComponent ?: appComponent.tmdbComponent()
-//            .also { tmdbComponent = it }
-//
-//    internal fun clearTmdbComponent() {
-//        tmdbComponent = null
-//    }
 }

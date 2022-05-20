@@ -1,13 +1,12 @@
 package com.mikyegresl.themoviedatabase.ui.movie_list
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationConverter
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationInteractor
-import com.mikyegresl.themoviedatabase.business.tmdb.IMovieListInteractor
-import com.mikyegresl.themoviedatabase.data.model.ConfigurationModel
-import com.mikyegresl.themoviedatabase.data.model.MovieModel
-import com.mikyegresl.themoviedatabase.ui.mvp.Presenter
+import com.mikyegresl.themoviedatabase.business.movie_list.IMovieListInteractor
+import com.mikyegresl.themoviedatabase.data.model.ui.ConfigurationUiModel
+import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.ui.common.mvp.Presenter
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulersTransformer
 import javax.inject.Inject
 
@@ -16,10 +15,10 @@ class MovieListPresenter @Inject constructor(
     private val configurationConverter: IConfigurationConverter,
     private val movieListInteractor: IMovieListInteractor,
     private val rxSchedulersTransformer: RxSchedulersTransformer,
-): Presenter<IMovieListView>(), IMovieListPresenter {
 
+): Presenter<IMovieListView>(), IMovieListPresenter {
     @VisibleForTesting
-    var configuration: ConfigurationModel? = null
+    var configurationUi: ConfigurationUiModel? = null
 
     private var isViewActive: Boolean = false
     private var isConfigurationLoading: Boolean = false
@@ -27,7 +26,7 @@ class MovieListPresenter @Inject constructor(
     private fun loadConfigurationIfNeeded() {
         if (isConfigurationLoading)
             return
-        configuration?.let { loadConfigurationSuccess(it) } ?: loadConfiguration()
+        configurationUi?.let { loadConfigurationSuccess(it) } ?: loadConfiguration()
     }
 
     private fun loadConfiguration() {
@@ -42,18 +41,39 @@ class MovieListPresenter @Inject constructor(
                 view?.hideLoading()
             }
             .map(configurationConverter::mapToConfigurationModel)
-//            .doOnSuccess { model ->
-//                event
-//            }
             .subscribe(::loadConfigurationSuccess, ::loadConfigurationError)
     }
 
-    private fun loadConfigurationSuccess(model: ConfigurationModel) {
-        configuration = model
+    private fun loadConfigurationSuccess(uiModel: ConfigurationUiModel) {
+        configurationUi = uiModel
         view?.hideLoading()
     }
 
     private fun loadConfigurationError(throwable: Throwable) {
+        view?.showError(throwable.message!!)
+    }
+
+    private fun loadTopRatedSuccess(topRated: List<MovieListResponseModel>) {
+        view?.showTopRated(topRated)
+    }
+
+    private fun loadTopRatedError(throwable: Throwable) {
+        view?.showError(throwable.message!!)
+    }
+
+    private fun loadPopularSuccess(popular: List<MovieListResponseModel>) {
+        view?.showPopular(popular)
+    }
+
+    private fun loadPopularError(throwable: Throwable) {
+        view?.showError(throwable.message!!)
+    }
+
+    private fun loadUpcomingSuccess(upcoming: List<MovieListResponseModel>) {
+        view?.showUpcoming(upcoming)
+    }
+
+    private fun loadUpcomingError(throwable: Throwable) {
         view?.showError(throwable.message!!)
     }
 
@@ -66,21 +86,31 @@ class MovieListPresenter @Inject constructor(
             .doFinally {
                 view?.hideLoading()
             }
-            .subscribe( { loadTopRatedSuccess(it) }, ::loadTopRatedError)
+            .subscribe(::loadTopRatedSuccess, ::loadTopRatedError)
     }
 
-    private fun loadTopRatedSuccess(topRated: List<MovieModel>) {
-        Log.i(TAG, "loadTopRatedSuccess: $topRated")
-        view?.showTopRated(topRated)
-        view?.hideLoading()
+    override fun loadPopular() {
+        compositeDisposable += movieListInteractor.getPopular()
+            .compose(rxSchedulersTransformer.getIOToMainTransformer())
+            .doOnSubscribe {
+                view?.showLoading()
+            }
+            .doFinally {
+                view?.hideLoading()
+            }
+            .subscribe(::loadPopularSuccess, ::loadPopularError)
     }
 
-    private fun loadTopRatedError(throwable: Throwable) {
-        view?.showError(throwable.message!!)
-    }
-
-    override fun loadRecent() {
-
+    override fun loadUpcoming() {
+        compositeDisposable += movieListInteractor.getUpcoming()
+            .compose(rxSchedulersTransformer.getIOToMainTransformer())
+            .doOnSubscribe {
+                view?.showLoading()
+            }
+            .doFinally {
+                view?.hideLoading()
+            }
+            .subscribe(::loadUpcomingSuccess, ::loadUpcomingError)
     }
 
     override fun onViewResume() {
@@ -88,18 +118,11 @@ class MovieListPresenter @Inject constructor(
 
         loadConfigurationIfNeeded()
         loadTopRated()
+        loadPopular()
+        loadUpcoming()
     }
 
     override fun onViewPause() {
         isViewActive = false
     }
-
-    override fun onViewReady() {
-        super.onViewReady()
-
-        loadConfigurationIfNeeded()
-        loadTopRated()
-    }
 }
-
-private val TAG = MovieListPresenter::class.java.simpleName

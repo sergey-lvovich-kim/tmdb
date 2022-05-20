@@ -7,7 +7,10 @@
     <string name="movie_popularity">95.147</string>
     <string name="movie_vote_average">8.7</string>
     <string name="movie_vote_count">20945</string>
-    <string name="recent">Recent</string>
+    <string name="popular">Popular</string>
     <string name="top_rated">Top rated</string>
     <string name="movie_genres">Drama, Crime</string>
+    <string name="upcoming">Upcoming</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

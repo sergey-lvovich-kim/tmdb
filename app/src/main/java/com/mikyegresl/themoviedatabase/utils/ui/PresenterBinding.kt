@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.mikyegresl.themoviedatabase.ui.mvp.IPresenter
-import com.mikyegresl.themoviedatabase.ui.mvp.IView
-import com.mikyegresl.themoviedatabase.ui.mvp.Presenter
+import com.mikyegresl.themoviedatabase.ui.common.mvp.IPresenter
+import com.mikyegresl.themoviedatabase.ui.common.mvp.IView
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 

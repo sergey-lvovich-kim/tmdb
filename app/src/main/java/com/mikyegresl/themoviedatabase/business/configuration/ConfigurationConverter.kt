@@ -1,8 +1,8 @@
 package com.mikyegresl.themoviedatabase.business.configuration
 
 import android.util.Log
-import com.mikyegresl.themoviedatabase.data.model.ConfigurationModel
 import com.mikyegresl.themoviedatabase.data.model.response.ConfigurationResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.ConfigurationUiModel
 import com.mikyegresl.themoviedatabase.utils.Constants.EMPTY_STRING
 import javax.inject.Inject
 
@@ -10,8 +10,8 @@ class ConfigurationConverter @Inject constructor(
 
 ): IConfigurationConverter {
 
-    override fun mapToConfigurationModel(model: ConfigurationResponseModel): ConfigurationModel {
-        val configuration = ConfigurationModel(
+    override fun mapToConfigurationModel(model: ConfigurationResponseModel): ConfigurationUiModel {
+        val configuration = ConfigurationUiModel(
             imageUrl = model.imagesConfiguration?.secureBaseUrl ?: EMPTY_STRING,
             posterSize = model.imagesConfiguration?.let {
                 if (it.posterSizes.isNullOrEmpty()) EMPTY_STRING else it.posterSizes[0]

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.mikyegresl.themoviedatabase.ui.common.view.VerticalSwipeRefresh
         android:id="@+id/srlRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -42,19 +42,42 @@
                 android:focusableInTouchMode="true" />
 
             <TextView
-                android:id="@+id/tvRecent"
+                android:id="@+id/tvPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_32dp"
                 android:layout_marginStart="@dimen/size_8dp"
                 android:layout_marginEnd="@dimen/size_8dp"
-                android:text="@string/recent"
+                android:text="@string/popular"
                 android:textColor="@color/graphite_01"
                 android:textStyle="bold"
                 android:textSize="@dimen/size_20sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvRecent"
+                android:id="@+id/rvPopular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_movie" />
+
+            <TextView
+                android:id="@+id/tvUpcoming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_32dp"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:layout_marginEnd="@dimen/size_8dp"
+                android:text="@string/upcoming"
+                android:textColor="@color/graphite_01"
+                android:textStyle="bold"
+                android:textSize="@dimen/size_20sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUpcoming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_8dp"
@@ -66,6 +89,6 @@
 
         </LinearLayout>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.mikyegresl.themoviedatabase.ui.common.view.VerticalSwipeRefresh>
 
 </FrameLayout>

@@ -4,8 +4,8 @@ import android.os.Bundle
 import com.mikyegresl.themoviedatabase.R
 import com.mikyegresl.themoviedatabase.di.activity.ActivityComponent
 import com.mikyegresl.themoviedatabase.di.application.AppComponent
-import com.mikyegresl.themoviedatabase.di.configuration.ConfigurationComponent
-import com.mikyegresl.themoviedatabase.ui.application.TmdbApp
+import com.mikyegresl.themoviedatabase.ui.common.application.TmdbApp
+import com.mikyegresl.themoviedatabase.ui.common.activity.BaseActivity
 
 class MainActivity : BaseActivity() {
 
@@ -14,7 +14,9 @@ class MainActivity : BaseActivity() {
     }
 
     val activityComponent: ActivityComponent by lazy {
-        appComponent.activityComponent()
+        appComponent.activityComponentBuilder()
+            .bindActivity(this)
+            .build()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mikyegresl.themoviedatabase.R
-import com.mikyegresl.themoviedatabase.data.model.MovieModel
+import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
 import com.mikyegresl.themoviedatabase.databinding.FragmentMovieListBinding
 import com.mikyegresl.themoviedatabase.di.movie_list.MovieListComponent
-import com.mikyegresl.themoviedatabase.ui.BaseFragment
+import com.mikyegresl.themoviedatabase.ui.common.fragment.BaseFragment
 import com.mikyegresl.themoviedatabase.ui.MainActivity
+import com.mikyegresl.themoviedatabase.ui.navigation.MovieListNavigator
 import com.mikyegresl.themoviedatabase.utils.ui.presenterBinding
+import javax.inject.Inject
 
 class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListView {
 
@@ -25,9 +27,20 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
         movieListComponent.presenter()
     }
 
-    private val adapter: MovieListAdapter by lazy {
+    private val topRatedAdapter: MovieListAdapter by lazy {
         MovieListAdapter(::onMovieClicked)
     }
+
+    private val popularAdapter: MovieListAdapter by lazy {
+        MovieListAdapter(::onMovieClicked)
+    }
+
+    private val upcomingAdapter: MovieListAdapter by lazy {
+        MovieListAdapter(::onMovieClicked)
+    }
+
+    @Inject
+    lateinit var navigator: MovieListNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,10 +54,7 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMovieListBinding.inflate(inflater, container, false)
-
-        with (binding) {
-            srlRefresh.setOnRefreshListener(::onRefreshClicked)
-        }
+        binding.srlRefresh.setOnRefreshListener(::onRefreshClicked)
 
         return binding.root
     }
@@ -89,21 +99,27 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
 
     }
 
-    override fun showTopRated(topRated: List<MovieModel>) {
-        binding.rvTopRated.adapter = adapter.apply { items = topRated }
+    override fun showTopRated(topRated: List<MovieListResponseModel>) {
+        binding.rvTopRated.adapter = topRatedAdapter.apply { items = topRated }
     }
 
-    override fun showRecent(recent: List<MovieModel>) {
-
+    override fun showPopular(popular: List<MovieListResponseModel>) {
+        binding.rvPopular.adapter = popularAdapter.apply { items = popular }
     }
 
-    override fun onMovieClicked(movie: MovieModel) {
-        //todo: implement details navigation
+    override fun showUpcoming(upcoming: List<MovieListResponseModel>) {
+        binding.rvUpcoming.adapter = upcomingAdapter.apply { items = upcoming }
+    }
+
+    override fun onMovieClicked(movieListResponse: MovieListResponseModel) {
+        navigator.toMovieDetails(movieListResponse)
+        Log.i(TAG, "onMovieClicked: $movieListResponse")
     }
 
     override fun onRefreshClicked() {
         presenter.loadTopRated()
-        presenter.loadRecent()
+        presenter.loadPopular()
+        presenter.loadUpcoming()
     }
 
     override fun addToFavorites() {
@@ -111,12 +127,15 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
     }
 
     override fun goToFavorites() {
+
     }
 
     override fun goToSearch() {
+
     }
 
     override fun exit() {
+
     }
 }
 
