@@ -1,6 +1,6 @@
 package com.mikyegresl.themoviedatabase.business.configuration
 
-import com.mikyegresl.themoviedatabase.data.model.response.ConfigurationResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.configuration.ConfigurationResponseModel
 import com.mikyegresl.themoviedatabase.data.repository.IConfigurationRepository
 import io.reactivex.Single
 import javax.inject.Inject

@@ -35,6 +35,8 @@
     <dimen name="size_128dp">128dp</dimen>
     <dimen name="size_136dp">136dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
+    <dimen name="size_320dp">320dp</dimen>
+    <dimen name="size_480dp">480dp</dimen>
 
     <dimen name="swipe_refresher_offset">@dimen/size_48dp</dimen>
     <dimen name="swipe_refresher_offset_end">96dp</dimen>

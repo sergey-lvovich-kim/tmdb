@@ -1,6 +1,6 @@
 package com.mikyegresl.themoviedatabase.business.movie_list
 
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.movie_list.MovieListResponseModel
 import com.mikyegresl.themoviedatabase.utils.rx.Rx2EventBus
 import io.reactivex.Observable
 import javax.inject.Inject

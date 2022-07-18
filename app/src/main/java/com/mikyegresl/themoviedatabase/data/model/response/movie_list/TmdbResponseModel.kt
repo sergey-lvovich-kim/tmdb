@@ -1,7 +1,6 @@
-package com.mikyegresl.themoviedatabase.data.model.response
+package com.mikyegresl.themoviedatabase.data.model.response.movie_list
 
 import com.google.gson.annotations.SerializedName
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
 
 data class TmdbResponseModel(
     @SerializedName("total_results")

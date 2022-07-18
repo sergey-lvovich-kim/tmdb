@@ -1,9 +1,6 @@
 package com.mikyegresl.themoviedatabase.data.repository
 
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieCreditsResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieDetailsResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieImagesResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieWatchProvidersResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.movie_details.*
 import io.reactivex.Observable
 
 interface IMovieDetailsRepository {
@@ -14,5 +11,7 @@ interface IMovieDetailsRepository {
 
     fun getMovieCredits(id: Long): Observable<MovieCreditsResponseModel>
 
-    fun getMovieWatchProviders(id: Long): Observable<MovieWatchProvidersResponseModel>
+    fun getMovieReviews(id: Long, page: Int): Observable<MovieReviewsResponseModel>
+
+//    fun getMovieWatchProviders(id: Long): Observable<MovieWatchProvidersResponseModel>
 }

@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.mikyegresl.themoviedatabase.di.movie_details.MovieDetailsComponent
 import com.mikyegresl.themoviedatabase.di.movie_list.MovieListComponent
-import com.mikyegresl.themoviedatabase.ui.navigation.TmdbNavigator
-import com.mikyegresl.themoviedatabase.ui.navigation.MovieListNavigator
+import com.mikyegresl.themoviedatabase.ui.navigation.*
 import dagger.*
 import javax.inject.Scope
 
@@ -47,5 +46,5 @@ abstract class ActivityModule {
 
     @ActivityScope
     @Binds
-    abstract fun bindNavigator(impl: MovieListNavigator): TmdbNavigator
+    abstract fun bindNavigator(impl: Navigator): INavigator
 }

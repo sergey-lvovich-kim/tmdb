@@ -1,10 +1,10 @@
-package com.mikyegresl.themoviedatabase.data.model.response
+package com.mikyegresl.themoviedatabase.data.model.response.movie_list
 
 import com.google.gson.annotations.SerializedName
 
 data class MovieListResponseModel(
     @SerializedName("id")
-    val id: Int? = null,
+    val id: Long? = null,
     @SerializedName("title")
     val title: String? = null,
     @SerializedName("overview")

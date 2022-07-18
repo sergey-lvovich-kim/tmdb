@@ -1,11 +1,10 @@
 package com.mikyegresl.themoviedatabase.business.movie_list
 
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_list.MovieListUiModel
 import io.reactivex.Observable
 
 interface IMovieListInteractor {
-    fun getTopRated(): Observable<List<MovieListResponseModel>>
-    fun getPopular(): Observable<List<MovieListResponseModel>>
-    fun getUpcoming(): Observable<List<MovieListResponseModel>>
-    fun searchMovie(query: String): Observable<List<MovieListResponseModel>>
+    fun getTopRated(): Observable<List<MovieListUiModel>>
+    fun getPopular(): Observable<List<MovieListUiModel>>
+    fun getUpcoming(): Observable<List<MovieListUiModel>>
 }

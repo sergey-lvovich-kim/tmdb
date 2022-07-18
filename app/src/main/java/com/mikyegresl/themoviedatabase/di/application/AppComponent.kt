@@ -1,10 +1,6 @@
 package com.mikyegresl.themoviedatabase.di.application
 
-import android.app.Application
-import com.mikyegresl.themoviedatabase.data.repository.ConfigurationRepository
-import com.mikyegresl.themoviedatabase.data.repository.IConfigurationRepository
-import com.mikyegresl.themoviedatabase.data.repository.ITmdbRepository
-import com.mikyegresl.themoviedatabase.data.repository.TmdbRepository
+import com.mikyegresl.themoviedatabase.data.repository.*
 import com.mikyegresl.themoviedatabase.data.service.TmdbService
 import com.mikyegresl.themoviedatabase.di.activity.ActivityComponent
 import com.mikyegresl.themoviedatabase.utils.Constants
@@ -85,5 +81,9 @@ internal abstract class AppModule {
 
     @AppScope
     @Binds
-    abstract fun bindTmdbRepository(impl: TmdbRepository): ITmdbRepository
+    abstract fun bindMovieListRepository(impl: MovieListRepository): IMovieListRepository
+
+    @AppScope
+    @Binds
+    abstract fun bindMovieDetailsRepository(impl: MovieDetailsRepository): IMovieDetailsRepository
 }

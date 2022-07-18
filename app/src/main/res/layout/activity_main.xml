@@ -2,9 +2,10 @@
 <androidx.fragment.app.FragmentContainerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_container_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.mikyegresl.themoviedatabase.ui.movie_list.MovieListFragment"
-    android:tag="my_tag">
+    android:id="@+id/navHostFragment"
+    android:name="androidx.navigation.fragment.NavHostFragment"
+    app:defaultNavHost="true"
+    app:navGraph="@navigation/main_navigation">
 </androidx.fragment.app.FragmentContainerView>

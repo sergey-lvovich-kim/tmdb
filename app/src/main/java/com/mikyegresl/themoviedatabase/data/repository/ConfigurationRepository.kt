@@ -1,6 +1,6 @@
 package com.mikyegresl.themoviedatabase.data.repository
 
-import com.mikyegresl.themoviedatabase.data.model.response.ConfigurationResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.configuration.ConfigurationResponseModel
 import com.mikyegresl.themoviedatabase.data.service.TmdbService
 import io.reactivex.Single
 import javax.inject.Inject

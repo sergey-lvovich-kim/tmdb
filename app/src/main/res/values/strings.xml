@@ -3,14 +3,18 @@
 
     <string name="movie_title">The Shawshank Redemption</string>
     <string name="movie_overview">Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates — including an older prisoner named Red — for his integrity and unquenchable sense of hope.</string>
-    <string name="movie_release_date">September 9 1994</string>
+    <string name="movie_release_date">1994</string>
     <string name="movie_popularity">95.147</string>
     <string name="movie_vote_average">8.7</string>
     <string name="movie_vote_count">20945</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top rated</string>
     <string name="movie_genres">Drama, Crime</string>
+    <string name="movie_runime">1 h 54 min</string>
     <string name="upcoming">Upcoming</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_original_title">Побег из Шоушенка</string>
+    <string name="movie_country">USA</string>
+    <string name="movie_budget">1450000</string>
 </resources>

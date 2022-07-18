@@ -11,6 +11,9 @@
         <entry key="..\:/Users/mikyegresl/AndroidStudioProjects/my_open_src/TheMovieDatabase/app/src/main/res/layout/fragment_movie_search.xml" value="0.25" />
         <entry key="..\:/Users/mikyegresl/AndroidStudioProjects/my_open_src/TheMovieDatabase/app/src/main/res/layout/fragment_tmdb.xml" value="0.25" />
         <entry key="..\:/Users/mikyegresl/AndroidStudioProjects/my_open_src/TheMovieDatabase/app/src/main/res/layout/item_movie.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.26902173913043476" />
+        <entry key="app/src/main/res/layout/fragment_movie_details.xml" value="0.23278985507246377" />
+        <entry key="app/src/main/res/layout/fragment_movie_list.xml" value="0.23278985507246377" />
       </map>
     </option>
   </component>

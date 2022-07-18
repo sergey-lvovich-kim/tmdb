@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mikyegresl.themoviedatabase.R
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_list.MovieListUiModel
 import com.mikyegresl.themoviedatabase.databinding.FragmentMovieListBinding
 import com.mikyegresl.themoviedatabase.di.movie_list.MovieListComponent
 import com.mikyegresl.themoviedatabase.ui.common.fragment.BaseFragment
 import com.mikyegresl.themoviedatabase.ui.MainActivity
-import com.mikyegresl.themoviedatabase.ui.navigation.MovieListNavigator
+import com.mikyegresl.themoviedatabase.ui.navigation.IMovieListRouter
 import com.mikyegresl.themoviedatabase.utils.ui.presenterBinding
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
     }
 
     @Inject
-    lateinit var navigator: MovieListNavigator
+    lateinit var router: IMovieListRouter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +57,18 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
         binding.srlRefresh.setOnRefreshListener(::onRefreshClicked)
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        router.bind(requireActivity(), R.id.navHostFragment)
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        router.unbind()
     }
 
     override fun onResume() {
@@ -99,21 +111,20 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
 
     }
 
-    override fun showTopRated(topRated: List<MovieListResponseModel>) {
+    override fun showTopRated(topRated: List<MovieListUiModel>) {
         binding.rvTopRated.adapter = topRatedAdapter.apply { items = topRated }
     }
 
-    override fun showPopular(popular: List<MovieListResponseModel>) {
+    override fun showPopular(popular: List<MovieListUiModel>) {
         binding.rvPopular.adapter = popularAdapter.apply { items = popular }
     }
 
-    override fun showUpcoming(upcoming: List<MovieListResponseModel>) {
+    override fun showUpcoming(upcoming: List<MovieListUiModel>) {
         binding.rvUpcoming.adapter = upcomingAdapter.apply { items = upcoming }
     }
 
-    override fun onMovieClicked(movieListResponse: MovieListResponseModel) {
-        navigator.toMovieDetails(movieListResponse)
-        Log.i(TAG, "onMovieClicked: $movieListResponse")
+    override fun onMovieClicked(movieId: Long) {
+        router.toMovieDetails(movieId)
     }
 
     override fun onRefreshClicked() {
@@ -135,7 +146,7 @@ class MovieListFragment: BaseFragment(R.layout.fragment_movie_list), IMovieListV
     }
 
     override fun exit() {
-
+        router.back()
     }
 }
 

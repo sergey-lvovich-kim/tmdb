@@ -1,4 +1,4 @@
-package com.mikyegresl.themoviedatabase.data.model.response
+package com.mikyegresl.themoviedatabase.data.model.response.configuration
 
 import com.google.gson.annotations.SerializedName
 

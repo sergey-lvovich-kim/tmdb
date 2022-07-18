@@ -1,8 +1,8 @@
-package com.mikyegresl.themoviedatabase.data.model
+package com.mikyegresl.themoviedatabase.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Backdrop(
+data class BackdropResponseModel(
     @SerializedName("height")
     val height: Int = 0,
     @SerializedName("width")

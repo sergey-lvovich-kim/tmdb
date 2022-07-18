@@ -2,40 +2,44 @@ package com.mikyegresl.themoviedatabase.data.model.response.movie_details
 
 import com.google.gson.annotations.SerializedName
 import com.mikyegresl.themoviedatabase.data.model.Genre
-import com.mikyegresl.themoviedatabase.data.model.ProductionCompany
-import com.mikyegresl.themoviedatabase.data.model.ProductionCountry
+import com.mikyegresl.themoviedatabase.data.model.response.ProductionCompanyResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.ProductionCountryResponseModel
 
 data class MovieDetailsResponseModel(
     @SerializedName("id")
-    val id: Long = 0,
+    val id: Long? = null,
     @SerializedName("title")
     val title: String? = null,
+    @SerializedName("original_title")
+    val originalTitle: String? = null,
     @SerializedName("overview")
     val overview: String? = null,
     @SerializedName("release_date")
     val releaseDate: String? = null,
     @SerializedName("popularity")
-    val popularity: String? = null,
+    val popularity: Float? = null,
     @SerializedName("vote_average")
-    val voteAverage: String? = null,
+    val voteAverage: Float? = null,
+    @SerializedName("vote_count")
+    val voteCount: Int? = null,
     @SerializedName("poster_path")
     val posterPath: String? = null,
     @SerializedName("backdrop_path")
     val backdropPath: String? = null,
     @SerializedName("budget")
-    val budget: Int = 0,
+    val budget: Int? = null,
     @SerializedName("revenue")
-    val revenue: Int = 0,
+    val revenue: Int? = null,
     @SerializedName("runtime")
-    val runtime: Int = 0,
+    val runtime: Int? = null,
     @SerializedName("video")
-    val hasVideo: Boolean = false,
+    val hasVideo: Boolean? = null,
     @SerializedName("adult")
-    val isAdultContent: Boolean = false,
+    val isAdultContent: Boolean? = null,
     @SerializedName("genres")
-    val genres: List<Genre> = emptyList(),
+    val genres: List<Genre>? = null,
     @SerializedName("production_countries")
-    val productionCountries: List<ProductionCountry> = emptyList(),
+    val productionCountries: List<ProductionCountryResponseModel>? = null,
     @SerializedName("production_companies")
-    val productionCompanies: List<ProductionCompany> = emptyList(),
+    val productionCompanies: List<ProductionCompanyResponseModel>? = null,
 )

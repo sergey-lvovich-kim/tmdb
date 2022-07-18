@@ -1,8 +1,8 @@
-package com.mikyegresl.themoviedatabase.data.model
+package com.mikyegresl.themoviedatabase.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductionCompany(
+data class ProductionCompanyResponseModel(
     @SerializedName("id")
     val id: Long = 0,
     @SerializedName("name")

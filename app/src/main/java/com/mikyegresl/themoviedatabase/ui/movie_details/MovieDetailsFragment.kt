@@ -9,23 +9,28 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.mikyegresl.themoviedatabase.R
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_details.MovieDetailsUiModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_details.MovieImageUiModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_details.MovieReviewUiModel
 import com.mikyegresl.themoviedatabase.databinding.FragmentMovieDetailsBinding
 import com.mikyegresl.themoviedatabase.di.movie_details.MovieDetailsComponent
 import com.mikyegresl.themoviedatabase.ui.common.fragment.BaseFragment
 import com.mikyegresl.themoviedatabase.ui.MainActivity
+import com.mikyegresl.themoviedatabase.ui.navigation.IMovieDetailsRouter
+import com.mikyegresl.themoviedatabase.ui.navigation.args.movieId
 import com.mikyegresl.themoviedatabase.utils.Constants
 import com.mikyegresl.themoviedatabase.utils.ui.presenterBinding
+import javax.inject.Inject
 
-class MovieDetailsFragment: BaseFragment(R.layout.fragment_movie_details), IMovieDesciptionView {
+class MovieDetailsFragment: BaseFragment(R.layout.fragment_movie_details), IMovieDetailsView {
 
     companion object {
-        private const val ARG_MOVIE = "movie"
+        private const val ARG_MOVIE_ID = "movie_id"
 
-        fun newInstance(movieListResponse: MovieListResponseModel): MovieDetailsFragment =
+        fun newInstance(movieId: Long): MovieDetailsFragment =
             MovieDetailsFragment().apply {
                 arguments?.apply {
-                    putParcelable(ARG_MOVIE, movieListResponse)
+                    putLong(ARG_MOVIE_ID, movieId)
                 }
             }
     }
@@ -40,13 +45,16 @@ class MovieDetailsFragment: BaseFragment(R.layout.fragment_movie_details), IMovi
         movieDetailsComponent.presenter()
     }
 
+    @Inject
+    lateinit var router: IMovieDetailsRouter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         movieDetailsComponent.inject(this)
 
-        val movieListResponseModel: MovieListResponseModel? = arguments?.getParcelable(ARG_MOVIE) as? MovieListResponseModel
-        Log.i(TAG, "onCreate: model=$movieListResponseModel")
+        val movieId: Long = arguments?.movieId ?: 0
+        presenter.setMovieId(movieId)
     }
 
     override fun onCreateView(
@@ -99,54 +107,62 @@ class MovieDetailsFragment: BaseFragment(R.layout.fragment_movie_details), IMovi
         Log.e(TAG, "showError: $error")
     }
 
-    override fun showMovieDetails(listResponseModel: MovieListResponseModel) {
+    override fun showMovieDetails(detailsModel: MovieDetailsUiModel) {
         with (binding) {
-            with (binding) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    tvTitle.text = Html.fromHtml(listResponseModel.title, Html.FROM_HTML_MODE_LEGACY)
-                    tvReleaseDate.text = Html.fromHtml(listResponseModel.releaseDate, Html.FROM_HTML_MODE_LEGACY)
-                    tvVote.text = Html.fromHtml(listResponseModel.voteAverage, Html.FROM_HTML_MODE_LEGACY)
-//                tvGenres.text = Html.fromHtml(model.genre, Html.FROM_HTML_MODE_LEGACY)
-                    tvOverview.text = Html.fromHtml(listResponseModel.overview, Html.FROM_HTML_MODE_LEGACY)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tvTitle.text = Html.fromHtml(detailsModel.title, Html.FROM_HTML_MODE_LEGACY)
+                tvVote.text = Html.fromHtml(detailsModel.voteAverage.toString(), Html.FROM_HTML_MODE_LEGACY)
+                tvVoteCount.text = Html.fromHtml(detailsModel.voteCount.toString(), Html.FROM_HTML_MODE_LEGACY)
+                tvOriginalTitle.text = Html.fromHtml(detailsModel.originalTitle, Html.FROM_HTML_MODE_LEGACY)
+                tvReleaseDate.text = Html.fromHtml(detailsModel.releaseDate, Html.FROM_HTML_MODE_LEGACY)
+                tvGenres.text = Html.fromHtml(detailsModel.genre, Html.FROM_HTML_MODE_LEGACY)
+                tvCountry.text = Html.fromHtml(detailsModel.country, Html.FROM_HTML_MODE_LEGACY)
+                tvRuntime.text = Html.fromHtml(detailsModel.runtime.toString(), Html.FROM_HTML_MODE_LEGACY)
+                tvBudget.text = Html.fromHtml(detailsModel.budget.toString(), Html.FROM_HTML_MODE_LEGACY)
+                tvRevenue.text = Html.fromHtml(detailsModel.revenue.toString(), Html.FROM_HTML_MODE_LEGACY)
+                tvOverview.text = Html.fromHtml(detailsModel.overview, Html.FROM_HTML_MODE_LEGACY)
 
-                }
-                else {
-                    @Suppress("DEPRECATION")
-                    tvTitle.text = Html.fromHtml(listResponseModel.title)
-                    @Suppress("DEPRECATION")
-                    tvReleaseDate.text = Html.fromHtml(listResponseModel.releaseDate)
-                    @Suppress("DEPRECATION")
-                    tvVote.text = Html.fromHtml(listResponseModel.voteAverage)
-                    @Suppress("DEPRECATION")
-//                tvGenres.text = Html.fromHtml(model.genre)
-                    @Suppress("DEPRECATION")
-                    tvOverview.text = Html.fromHtml(listResponseModel.overview)
-                }
-
-                Glide
-                    .with(requireContext())
-                    .load(Constants.TMDB_POSTER_URL + "w92" + listResponseModel.posterPath)
-                    .centerCrop()
-//                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(binding.ivPoster)
-
-                Glide
-                    .with(requireContext())
-                    .load(Constants.TMDB_POSTER_URL + "w92" + listResponseModel.backdropPath)
-                    .centerCrop()
-//                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(binding.ivBackdrop)
             }
+            else {
+//                @Suppress("DEPRECATION")
+//                tvTitle.text = Html.fromHtml(detailsModel.title)
+//                @Suppress("DEPRECATION")
+//                tvReleaseDate.text = Html.fromHtml(detailsModel.releaseDate)
+//                @Suppress("DEPRECATION")
+//                tvVote.text = Html.fromHtml(detailsModel.voteAverage)
+//                @Suppress("DEPRECATION")
+//                tvGenres.text = Html.fromHtml(model.genre)
+//                @Suppress("DEPRECATION")
+//                tvOverview.text = Html.fromHtml(detailsModel.overview)
+            }
+
+            Glide
+                .with(requireContext())
+                .load(Constants.TMDB_POSTER_URL + "original" + detailsModel.posterPath)
+                .centerCrop()
+//                    .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.ivPoster)
+
+            Glide
+                .with(requireContext())
+                .load(Constants.TMDB_POSTER_URL + "original" + detailsModel.backdropPath)
+                .centerCrop()
+//                    .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.ivPoster)
         }
     }
 
-    override fun onBackPressed() {
-        onBackPressed()
+    override fun showMovieImages(images: List<MovieImageUiModel>) {
+        TODO("Not yet implemented")
     }
 
-    override fun onRefreshClicked() {
-        presenter.loadGenres()
+    override fun showMovieReviews(images: List<MovieReviewUiModel>) {
+        TODO("Not yet implemented")
     }
+
+    override fun onBackPressed() = router.back()
+
+    override fun onRefreshClicked() = presenter.loadMovieDetails()
 }
 
 private val TAG = MovieDetailsFragment::class.java.simpleName

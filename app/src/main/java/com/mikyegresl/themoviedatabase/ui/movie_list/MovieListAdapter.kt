@@ -4,23 +4,23 @@ import com.bumptech.glide.Glide
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegate
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_list.MovieListUiModel
 import com.mikyegresl.themoviedatabase.databinding.ItemMovieBinding
 import com.mikyegresl.themoviedatabase.utils.Constants
 
 internal class MovieListAdapter(
-    onItemClick: (MovieListResponseModel) -> Unit,
-): ListDelegationAdapter<List<MovieListResponseModel>>() {
+    onItemClick: (Long) -> Unit,
+): ListDelegationAdapter<List<MovieListUiModel>>() {
 
     init {
         delegatesManager.addDelegate(createAdapterDelegate(onItemClick))
     }
 
-    private fun createAdapterDelegate(onItemClick: (MovieListResponseModel) -> Unit): AdapterDelegate<List<MovieListResponseModel>> =
+    private fun createAdapterDelegate(onItemClick: (Long) -> Unit): AdapterDelegate<List<MovieListUiModel>> =
         adapterDelegateViewBinding(
             { inflater, parent -> ItemMovieBinding.inflate(inflater, parent, false) }
         ) {
-            itemView.setOnClickListener { onItemClick(item) }
+            itemView.setOnClickListener { onItemClick(item.id) }
 
             bind {
                 binding.tvTitle.text = item.title

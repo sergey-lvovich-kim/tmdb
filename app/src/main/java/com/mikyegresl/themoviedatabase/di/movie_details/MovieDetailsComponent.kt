@@ -4,6 +4,8 @@ import com.mikyegresl.themoviedatabase.business.movie_details.*
 import com.mikyegresl.themoviedatabase.ui.movie_details.IMovieDetailsPresenter
 import com.mikyegresl.themoviedatabase.ui.movie_details.MovieDetailsFragment
 import com.mikyegresl.themoviedatabase.ui.movie_details.MovieDetailsPresenter
+import com.mikyegresl.themoviedatabase.ui.navigation.IMovieDetailsRouter
+import com.mikyegresl.themoviedatabase.ui.navigation.MovieDetailsRouter
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulers
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulersTransformer
 import dagger.Binds
@@ -45,4 +47,8 @@ internal interface MovieDetailsModule {
     @MovieDetailsScope
     @Binds
     fun bindPresenter(impl: MovieDetailsPresenter): IMovieDetailsPresenter
+
+    @MovieDetailsScope
+    @Binds
+    fun bindMovieDetailsRouter(impl: MovieDetailsRouter): IMovieDetailsRouter
 }

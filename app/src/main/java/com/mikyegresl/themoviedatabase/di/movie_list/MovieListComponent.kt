@@ -5,8 +5,8 @@ import com.mikyegresl.themoviedatabase.business.movie_list.*
 import com.mikyegresl.themoviedatabase.ui.movie_list.IMovieListPresenter
 import com.mikyegresl.themoviedatabase.ui.movie_list.MovieListFragment
 import com.mikyegresl.themoviedatabase.ui.movie_list.MovieListPresenter
-import com.mikyegresl.themoviedatabase.ui.navigation.TmdbNavigator
-import com.mikyegresl.themoviedatabase.ui.navigation.MovieListNavigator
+import com.mikyegresl.themoviedatabase.ui.navigation.IMovieListRouter
+import com.mikyegresl.themoviedatabase.ui.navigation.MovieListRouter
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulers
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulersTransformer
 import dagger.*
@@ -42,24 +42,20 @@ internal interface MovieListModule {
     @MovieListScope
     @Binds
     fun bindMovieListInteractor(interactor: MovieListInteractor): IMovieListInteractor
-//
-//    @MovieListScope
-//    @Binds
-//    fun bindMovieListConverter(converter: MovieListConverter): IMovieListConverter
+
+    @MovieListScope
+    @Binds
+    fun bindMovieListConverter(converter: MovieListConverter): IMovieListConverter
 
     @MovieListScope
     @Binds
     fun bindRxTransformer(transformer: RxSchedulers): RxSchedulersTransformer
-//
-//    @MovieListScope
-//    @Binds
-//    fun bindMovieListEventBus(eventBus: MovieListEventBus): IMovieListEventBus
 
     @MovieListScope
     @Binds
     fun bindMovieListPresenter(impl: MovieListPresenter): IMovieListPresenter
 
-//    @MovieListScope
-//    @Binds
-//    fun bindMovieListNavigator(impl: MovieListNavigator): TmdbNavigator
+    @MovieListScope
+    @Binds
+    fun bindMovieListRouter(impl: MovieListRouter): IMovieListRouter
 }

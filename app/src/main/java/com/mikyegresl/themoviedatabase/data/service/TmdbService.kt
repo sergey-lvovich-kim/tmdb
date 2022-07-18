@@ -1,11 +1,8 @@
 package com.mikyegresl.themoviedatabase.data.service
 
-import com.mikyegresl.themoviedatabase.data.model.response.ConfigurationResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.TmdbResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieCreditsResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieDetailsResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieImagesResponseModel
-import com.mikyegresl.themoviedatabase.data.model.response.movie_details.MovieWatchProvidersResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.configuration.ConfigurationResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.movie_list.TmdbResponseModel
+import com.mikyegresl.themoviedatabase.data.model.response.movie_details.*
 import com.mikyegresl.themoviedatabase.utils.Constants
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -65,17 +62,18 @@ interface TmdbService {
         @Query("language") language: String?
     ): Single<MovieCreditsResponseModel>
 
-    @GET("movie/{movie_id}/images?api_key=${Constants.API_KEY}")
-    fun getMovieWatchProviders(
+    @GET("movie/{movie_id}/reviews?api_key=${Constants.API_KEY}")
+    fun getMovieReviews(
         @Path("movie_id") id: Long,
-        @Query("language") language: String?
-    ): Single<MovieWatchProvidersResponseModel>
+        @Query("language") language: String?,
+        @Query("page") page: Int
+    ): Single<MovieReviewsResponseModel>
 
-    @GET("movie/{movie_id}/images?api_key=${Constants.API_KEY}")
-    fun getMovieWatchProviders(
-        @Path("movie_id") id: Long,
-        @Query("language") language: String?
-    ): Single<MovieWatchProvidersResponseModel>
+//    @GET("movie/{movie_id}/watch/providers?api_key=${Constants.API_KEY}")
+//    fun getMovieWatchProviders(
+//        @Path("movie_id") id: Long,
+//        @Query("language") language: String?
+//    ): Single<MovieWatchProvidersResponseModel>
 
     /* Movie search */
 

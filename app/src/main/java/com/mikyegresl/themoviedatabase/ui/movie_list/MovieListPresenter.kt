@@ -4,8 +4,8 @@ import androidx.annotation.VisibleForTesting
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationConverter
 import com.mikyegresl.themoviedatabase.business.configuration.IConfigurationInteractor
 import com.mikyegresl.themoviedatabase.business.movie_list.IMovieListInteractor
-import com.mikyegresl.themoviedatabase.data.model.ui.ConfigurationUiModel
-import com.mikyegresl.themoviedatabase.data.model.response.MovieListResponseModel
+import com.mikyegresl.themoviedatabase.data.model.ui.configuration.ConfigurationUiModel
+import com.mikyegresl.themoviedatabase.data.model.ui.movie_list.MovieListUiModel
 import com.mikyegresl.themoviedatabase.ui.common.mvp.Presenter
 import com.mikyegresl.themoviedatabase.utils.rx.RxSchedulersTransformer
 import javax.inject.Inject
@@ -53,7 +53,7 @@ class MovieListPresenter @Inject constructor(
         view?.showError(throwable.message!!)
     }
 
-    private fun loadTopRatedSuccess(topRated: List<MovieListResponseModel>) {
+    private fun loadTopRatedSuccess(topRated: List<MovieListUiModel>) {
         view?.showTopRated(topRated)
     }
 
@@ -61,7 +61,7 @@ class MovieListPresenter @Inject constructor(
         view?.showError(throwable.message!!)
     }
 
-    private fun loadPopularSuccess(popular: List<MovieListResponseModel>) {
+    private fun loadPopularSuccess(popular: List<MovieListUiModel>) {
         view?.showPopular(popular)
     }
 
@@ -69,7 +69,7 @@ class MovieListPresenter @Inject constructor(
         view?.showError(throwable.message!!)
     }
 
-    private fun loadUpcomingSuccess(upcoming: List<MovieListResponseModel>) {
+    private fun loadUpcomingSuccess(upcoming: List<MovieListUiModel>) {
         view?.showUpcoming(upcoming)
     }
 
